@@ -1,0 +1,14 @@
+{
+    "version": 1,
+    "revision": 0,
+    "rules": [
+        {
+            "primary-output": "common.dir\\Debug\\logger.obj",
+            "outputs": [
+                "D:\\raspberry_pi_repo\\rberry_pi_repo\\build\\common\\Debug\\common.pdb",
+                "common.dir\\Debug\\"
+            ],
+            "requires": []
+        }
+    ]
+}

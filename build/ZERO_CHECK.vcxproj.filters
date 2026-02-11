@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="D:\raspberry_pi_repo\rberry_pi_repo\build\CMakeFiles\51e59ffcd0dd86dcdc77d4f0398ea269\generate.stamp.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{77860D91-8567-3FC5-BD2F-75ACD53CAE92}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,8 @@
+{
+	"InstallScripts" : 
+	[
+		"D:/raspberry_pi_repo/rberry_pi_repo/build/cmake_install.cmake",
+		"D:/raspberry_pi_repo/rberry_pi_repo/build/common/cmake_install.cmake"
+	],
+	"Parallel" : false
+}
