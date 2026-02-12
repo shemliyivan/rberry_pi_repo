@@ -1,4 +1,4 @@
- cmake_minimum_required(VERSION 4.2)
+cmake_minimum_required(VERSION 4.2)
 
 # 1. Create a static library target named 'common' 
 add_library(common STATIC  
@@ -8,4 +8,4 @@ src/logger.cpp
 target_include_directories(common  
 PUBLIC  
 include 
-) 
+)

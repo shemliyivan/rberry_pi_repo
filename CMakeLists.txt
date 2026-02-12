@@ -6,4 +6,4 @@ add_subdirectory(common)
 
 add_executable(app main.cpp) 
 
-target_link_libraries(app PRIVATE common) 
+target_link_libraries(app PRIVATE common)
