@@ -28,7 +28,9 @@ endif()
 add_library(serial_library STATIC ${ALL_SERIAL_SOURCES})
 target_include_directories(serial_library PUBLIC "/home/ivan/SerialLibrary/serial/include")
 
-add_executable(app main.cpp) 
+add_executable(app main.cpp common/src/JsonParser.cpp common/src/UartHandler.cpp) 
+target_include_directories(app PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/common/include")
+target_include_directories(app PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/common/")
 
 find_package(Threads REQUIRED)
 
