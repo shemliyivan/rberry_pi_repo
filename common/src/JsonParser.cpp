@@ -18,5 +18,10 @@ UartDevice parser(std::string filename)
         std::exit(0);
     }
     
-    return UartDevice(root["path"].asString(), root["baud_rate"].asUInt());
+    if (!root.isMember("path") || !root.isMember("baud_rate")) {
+        std::cerr << "Помилка відсутні дані." << std::endl;
+        std::exit(1);
+    }
+
+    return UartDevice{root["path"].asString(), root["baud_rate"].asUInt()};
 }

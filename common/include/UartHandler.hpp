@@ -7,7 +7,7 @@ class UartHandler{
     private:
         serial::Serial my_serial;
     public:
-        UartHandler(std::string port, unsigned long baud_rate)
+        UartHandler(std::string port, uint64_t baud_rate)
             : my_serial(port, baud_rate, serial::Timeout::simpleTimeout(1000))
         {
             if(!my_serial.isOpen()){
@@ -20,5 +20,5 @@ class UartHandler{
         }
 
         size_t sendBytes(std::string bytes);
-        std::string receiveBytes(int size);
+        std::string receiveBytes(int size = 100);
 };
