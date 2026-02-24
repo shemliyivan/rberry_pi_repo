@@ -5,16 +5,21 @@
 #include "JsonParser.hpp"
 #include "UartHandler.hpp"
 #include "ThreadSafeQueue.hpp"
+#include "UartDevice.hpp"
 
 int main(){
 
-    UartDevice DevInfo = parser("../configuration.json");
+    std::string path_to_json("../configuration.json");
+
+    UartDevice DevInfo = parser(path_to_json);
     UartHandler my_serial(DevInfo.path, DevInfo.baud_rate);
 
     auto bytes_sended = my_serial.sendBytes("Hello from Ivan");
     std::cout << "Bytes sended: " << bytes_sended << std::endl;
 
-    std::thread receiver_message([&my_serial](){
+    ThreadSafeQueue threadsafe_queue;
+
+    std::thread receiver_message([&my_serial, &threadsafe_queue](){
         while(1){
             std::string received_bytes = my_serial.receiveBytes();
 
@@ -25,7 +30,7 @@ int main(){
         }
     });
 
-    std::thread processor_message([](){
+    std::thread processor_message([&threadsafe_queue](){
         while(1){
             std::cout << "New message:\n";
             std::cout << threadsafe_queue.pop() << std::endl; 

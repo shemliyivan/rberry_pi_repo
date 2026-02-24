@@ -1,9 +1,5 @@
 #pragma once
 #include <string>
+#include "UartDevice.hpp"
 
-struct UartDevice{
-    std::string path;
-    unsigned long baud_rate;
-};
-
-UartDevice parser(std::string filename);
+UartDevice parser(std::string& filename);

@@ -13,5 +13,3 @@ class ThreadSafeQueue{
         void push(std::string& received_bytes);
         std::string pop();
 };
-
-extern ThreadSafeQueue threadsafe_queue;

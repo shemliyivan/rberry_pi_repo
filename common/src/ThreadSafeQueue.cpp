@@ -3,8 +3,6 @@
 #include <mutex>
 #include <condition_variable>
 
-ThreadSafeQueue threadsafe_queue;
-
 void ThreadSafeQueue::push(std::string &received_bytes)
 {
     std::lock_guard<std::mutex> lock(mutexTSQ);

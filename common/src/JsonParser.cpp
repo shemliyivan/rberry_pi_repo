@@ -3,7 +3,7 @@
 #include <iostream>
 #include "json/json.h"
 
-UartDevice parser(std::string filename)
+UartDevice parser(std::string& filename)
 {
     Json::Value root;
 
