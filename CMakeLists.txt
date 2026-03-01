@@ -7,8 +7,8 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 
 find_package(Threads REQUIRED)
 
-add_subdirectory(JsonReader/jsoncpp)
-add_subdirectory(SerialLibrary/serial)
+add_subdirectory(JsonReader)
+add_subdirectory(SerialLibrary)
 add_subdirectory(common)
 
 add_executable(app main.cpp)
