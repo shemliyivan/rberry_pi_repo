@@ -6,18 +6,16 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
 find_package(Threads REQUIRED)
-find_package(PkgConfig REQUIRED)
 
 add_subdirectory(JsonReader)
 add_subdirectory(SerialLibrary)
-
 add_subdirectory(common)
 
 add_executable(app main.cpp)
 
 target_link_libraries(app PRIVATE 
     common_lib
-    json_lib
+    jsoncpp_lib
     serial
     Threads::Threads
     rt
