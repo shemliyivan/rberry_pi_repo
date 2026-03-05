@@ -6,10 +6,23 @@
 #include "UartHandler.hpp"
 #include "ThreadSafeQueue.hpp"
 #include "UartDevice.hpp"
+#include "MqttHandler.hpp"
 
 int main(){
+    const std::string BROKER_IP("mqtt://broker.hivemq.com:1883");
+    const std::string CLIENT_ID("Ivan_Esp32_RberryPi4");\
+    MqttHandler mqtt_client(BROKER_IP, CLIENT_ID);
 
-    std::string path_to_json("../configuration.json");
+    try {
+        std::cout << "Connecting to MQTT..." << std::endl;
+        mqtt_client.connect_and_subscribe();
+        std::cout << "MQTT Ready. Subscribed to studio/led/status" << std::endl;
+    } catch (const mqtt::exception& exc) {
+        std::cerr << "MQTT Connection Error: " << exc.what() << std::endl;
+        return 1;
+    }
+
+    std::string path_to_json("/etc/my-uart-app/configuration.json");
 
     UartDevice DevInfo = parser(path_to_json);
     UartHandler my_serial(DevInfo.path, DevInfo.baud_rate);
@@ -32,10 +45,28 @@ int main(){
 
     std::thread processor_message([&threadsafe_queue](){
         while(1){
-            std::cout << "New message:\n";
-            std::cout << threadsafe_queue.pop() << std::endl; 
+            std::string msg = threadsafe_queue.pop();
+            std::cout << "[UART LOG]: " << msg << std::endl;
         }
     });
+
+    uint16_t r, g, b;
+    
+    while(true) {
+        std::cout << "\nEnter RGB values (0-255) separated by space." << std::endl;
+        std::cout << "Enter -1 to exit: ";
+        
+        if (!(std::cin >> r) || r == -1) break;
+        std::cin >> g >> b;
+
+        if (r >= 0 && r <= 255 && g >= 0 && g <= 255 && b >= 0 && b <= 255) {
+            std::cout << "Sending Color: R=" << r << " G=" << g << " B=" << b << "..." << std::endl;
+            
+            mqtt_client.send_led_command(r, g, b);
+        } else {
+            std::cout << "Invalid input! Please use range 0-255." << std::endl;
+        }
+    }
 
     receiver_message.join();
     processor_message.join();
