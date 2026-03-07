@@ -34,8 +34,6 @@ void MqttHandler::message_arrived(mqtt::const_message_ptr msg) {
     std::stringstream ss(msg->get_payload_str());
 
     if (Json::parseFromStream(builder, ss, &root, &errs)) {
-        std::cout << "[FEEDBACK] Device: " << root["device_id"].asString() 
-                  << " | State: " << root["state"].asString()
-                  << " | Uptime: " << root["uptime"].asInt() << "s" << std::endl;
+        std::cout << "MESSAGE GET:" << msg->get_payload_str() << std::endl;
     }
 }

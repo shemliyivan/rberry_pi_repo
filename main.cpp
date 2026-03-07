@@ -50,7 +50,8 @@ int main(){
         }
     });
 
-    uint16_t r, g, b;
+    int choice;
+    int r, g, b;
     
     while(true) {
         std::cout << "\nEnter RGB values (0-255) separated by space." << std::endl;
@@ -58,11 +59,23 @@ int main(){
         
         if (!(std::cin >> r) || r == -1) break;
         std::cin >> g >> b;
+     
+        std::cout << "Select interface:\n" << "1. UART\n" << "2. MQTT\n";
+        std::cin >> choice;
 
         if (r >= 0 && r <= 255 && g >= 0 && g <= 255 && b >= 0 && b <= 255) {
-            std::cout << "Sending Color: R=" << r << " G=" << g << " B=" << b << "..." << std::endl;
-            
-            mqtt_client.send_led_command(r, g, b);
+            if(choice == 2){
+                std::cout << "Sending Color: R=" << r << " G=" << g << " B=" << b << "..." << std::endl;
+                mqtt_client.send_led_command(r, g, b);
+            }
+            else if(choice == 1){
+                std::cout << "Sending Color: R=" << r << " G=" << g << " B=" << b << "..." << std::endl;
+                std::string uart_cmd("LED:" + std::to_string(r) + "," + std::to_string(g) + "," + std::to_string(b));
+                my_serial.sendBytes(uart_cmd);
+            }
+            else{
+                std::cout << "Invalid input! Please user range 1 - 2\n";
+            }
         } else {
             std::cout << "Invalid input! Please use range 0-255." << std::endl;
         }

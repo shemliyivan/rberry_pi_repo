@@ -5,7 +5,7 @@
 class MqttHandler : public virtual mqtt::callback {
     mqtt::async_client client_;
     const std::string TOPIC_STATUS = "studio/led/status";
-    const std::string TOPIC_CMD = "studio/led/cmd";
+    const std::string TOPIC_CMD = "esp-lection/cmd";
 
 public:
     MqttHandler(const std::string& server_address, const std::string& client_id);
