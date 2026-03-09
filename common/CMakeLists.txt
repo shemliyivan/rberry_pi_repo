@@ -1,11 +1,16 @@
- cmake_minimum_required(VERSION 4.2)
+add_library(common_lib STATIC 
+    src/JsonParser.cpp 
+    src/UartHandler.cpp
+    src/ThreadSafeQueue.cpp
+    src/MqttHandler.cpp
+)
 
-# 1. Create a static library target named 'common' 
-add_library(common STATIC  
-src/logger.cpp 
-) 
-# 2. Define the header search path 
-target_include_directories(common  
-PUBLIC  
-include 
-) 
+target_include_directories(common_lib PUBLIC 
+    include/
+)
+
+target_link_libraries(common_lib PUBLIC 
+    jsoncpp_lib
+    serial
+    PahoMqttCpp::paho-mqttpp3
+)
